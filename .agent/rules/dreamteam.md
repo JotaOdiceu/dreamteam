@@ -9,6 +9,7 @@ This project uses **Dreamteam**, a multi-agent orchestration framework built for
 ## Quick Start
 
 Type `/dreamteam` to open the main menu, or use any of these commands:
+
 - `/dreamteam create` — Create a new team
 - `/dreamteam run <name>` — Run a team's pipeline
 - `/dreamteam teams` — List all teams
@@ -17,7 +18,7 @@ Type `/dreamteam` to open the main menu, or use any of these commands:
 
 ## Directory Structure
 
-```
+```markdown
 _core/          — Framework core (do not edit manually)
 _workspace/     — Persistent workspace context
 personas/       — Global reusable persona library
@@ -44,6 +45,7 @@ teams/{name}/
 Personas are **reusable across teams**. Create a persona once in `personas/` and use it in any team. Teams can also have local exclusive personas in `teams/{name}/personas/`.
 
 **Persona format (`personas/{id}.persona.md`):**
+
 ```markdown
 ---
 id: persona-id
@@ -84,7 +86,7 @@ version: 1.0.0
 - Always use `/dreamteam` commands to interact with the system
 - Do not edit files in `_core/` manually
 - `settings.json` for each team can be edited manually if needed
-- Context in `_workspace/context.md` is loaded in all runs
+- Context in `_workspace/context.json` is loaded in all runs
 
 ## Interaction Rules
 

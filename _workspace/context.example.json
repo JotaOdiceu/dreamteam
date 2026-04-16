@@ -1,0 +1,11 @@
+{
+  "user": "Your Name",
+  "language": "Portuguese",
+  "about": "Description of your project or company.",
+  "current_project": {
+    "name": "Project Name",
+    "description": "What this project is about.",
+    "notes": "Any relevant technical or process notes."
+  },
+  "additional_context": "Any other preferences or constraints."
+}
