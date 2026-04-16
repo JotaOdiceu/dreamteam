@@ -5,6 +5,7 @@ Este projeto usa o **Dreamteam**, um framework de orquestração de agentes de I
 ## Início Rápido
 
 Digite `/dreamteam` para abrir o menu principal, ou use qualquer um desses comandos:
+
 - `/dreamteam create` — Criar um novo time
 - `/dreamteam run <nome>` — Executar um time
 - `/dreamteam personas` — Gerenciar a biblioteca de personas
@@ -13,7 +14,7 @@ Digite `/dreamteam` para abrir o menu principal, ou use qualquer um desses coman
 
 ## Estrutura de Diretórios
 
-```
+```markdown
 _core/          — Núcleo do framework (não editar manualmente)
 _workspace/     — Contexto persistente do seu negócio/projeto
 personas/       — Biblioteca global de personas reutilizáveis
@@ -36,7 +37,7 @@ teams/{nome}/
 
 ## Personas
 
-A grande diferença do Dreamteam: personas são **reutilizáveis entre times**. Crie uma persona uma vez em `personas/` e use ela em qualquer time. Times também podem ter personas locais exclusivas.
+A grande diferença do Dreamteam: personas são **reutilizáveis entre times**. Crie uma persona uma vez em `personas/` e use em qualquer time. Times também podem ter personas locais exclusivas.
 
 ## Regras
 
