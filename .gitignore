@@ -1,0 +1,3 @@
+teams/*/output/*
+!teams/*/output/.gitignore
+teams/*/_memory/runs.md
