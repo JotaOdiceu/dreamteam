@@ -49,8 +49,8 @@ One paragraph describing the feature, its purpose, and who benefits from it.
 - Given {context}, when {action}, then {expected result}.
 
 ## Preliminary Data Model
-| Entity | Key Fields | Notes |
-| ------ | ---------- | ----- |
+| Entity | Key Fields | Notes   |
+|--------|------------|---------|
 | {name} | {fields}   | {notes} |
 
 ## Known Dependencies

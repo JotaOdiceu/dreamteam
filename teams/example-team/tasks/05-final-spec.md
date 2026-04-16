@@ -53,8 +53,8 @@ Read all four documents. Identify conflicts, gaps, and inconsistencies between t
 ---
 
 ## User Stories and Acceptance Criteria
-| Story | Acceptance Criteria |
-| ----- | ------------------- |
+| Story                           | Acceptance Criteria      |
+|---------------------------------|--------------------------|
 | As a {role}, I want to {action} | Given... When... Then... |
 
 ---
@@ -66,12 +66,12 @@ Read all four documents. Identify conflicts, gaps, and inconsistencies between t
 
 ### API Contract
 | Method | Path | Auth | Request Body | Response | Status Codes |
-| ------ | ---- | ---- | ------------ | -------- | ------------ |
+|--------|------|------|--------------|----------|--------------|
 | ...    | ...  | ...  | ...          | ...      | ...          |
 
 ### Database Schema
 | Table | Column | Type | Constraints | Index |
-| ----- | ------ | ---- | ----------- | ----- |
+|-------|--------|------|-------------|-------|
 
 ---
 
@@ -79,7 +79,7 @@ Read all four documents. Identify conflicts, gaps, and inconsistencies between t
 
 ### Routes
 | Route | Rendering | Layout |
-| ----- | --------- | ------ |
+|-------|-----------|--------|
 
 ### Component Tree
 {From frontend spec, consolidated.}
@@ -92,22 +92,22 @@ Read all four documents. Identify conflicts, gaps, and inconsistencies between t
 ## Security Requirements
 {Security requirements from security review, mandatory for implementation.}
 
-| Requirement | Severity | Applied In |
-| ----------- | -------- | ---------- |
+| Requirement | Severity | Applied In                |
+|-------------|----------|---------------------------|
 | {req}       | High     | Backend / Frontend / Both |
 
 ---
 
 ## Conflicts and Resolutions
-| Conflict | Resolution |
-| -------- | ---------- |
+| Conflict      | Resolution                         |
+|---------------|------------------------------------|
 | {description} | {how it was resolved or escalated} |
 
 ---
 
 ## Open Questions
-| Question | Owner | Due |
-| -------- | ----- | --- |
+| Question   | Owner          | Due                 |
+|------------|----------------|---------------------|
 | {question} | {name or role} | {date or milestone} |
 
 ---

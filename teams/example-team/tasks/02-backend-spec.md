@@ -37,14 +37,14 @@ The scope draft from the Scope Architect (`output/01-scope-draft.md`) defines wh
   - Exports: {list}
 
 ## API Contract
-| Method | Path | Auth | Request Body DTO | Response DTO | Status Codes |
-| ------ | ---- | ---- | ---------------- | ------------ | ------------ |
-| POST   | /... | JWT (role: user) | CreateXDto | XResponseDto | 201, 400, 401, 409 |
+| Method | Path | Auth             | Request Body DTO | Response DTO | Status Codes       |
+|--------|------|------------------|------------------|--------------|--------------------|
+| POST   | /... | JWT (role: user) | CreateXDto       | XResponseDto | 201, 400, 401, 409 |
 
 ## Database Schema
-| Table | Column | Type | Constraints | Index |
-| ----- | ------ | ---- | ----------- | ----- |
-| {table} | {col} | {type} | NOT NULL, UNIQUE | yes/no |
+| Table   | Column | Type   | Constraints      | Index  |
+|---------|--------|--------|------------------|--------|
+| {table} | {col}  | {type} | NOT NULL, UNIQUE | yes/no |
 
 ### Migration Notes
 {Describe what the migration does and any data backfill needed.}

@@ -30,8 +30,8 @@ The scope draft from the Scope Architect (`output/01-scope-draft.md`) describes 
 # Security Review: {Feature Name}
 
 ## Assets and Sensitivity
-| Asset | Sensitivity | Notes |
-| ----- | ----------- | ----- |
+| Asset       | Sensitivity         | Notes                     |
+|-------------|---------------------|---------------------------|
 | {data type} | High / Medium / Low | {what makes it sensitive} |
 
 ## Threat Surface

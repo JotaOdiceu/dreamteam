@@ -32,10 +32,10 @@ The scope draft from the Scope Architect (`output/01-scope-draft.md`) defines th
 # Frontend Specification: {Feature Name}
 
 ## Routes and Layouts
-| Route | Type | Rendering | Layout |
-| ----- | ---- | --------- | ------ |
-| /feature | Page | Server Component | RootLayout |
-| /feature/[id] | Dynamic Page | Mixed | FeatureLayout |
+| Route         | Type         | Rendering        | Layout        |
+|---------------|--------------|------------------|---------------|
+| /feature      | Page         | Server Component | RootLayout    |
+| /feature/[id] | Dynamic Page | Mixed            | FeatureLayout |
 
 ## Component Tree
 - `FeaturePage` (Server Component): fetches initial data, renders layout
@@ -45,10 +45,10 @@ The scope draft from the Scope Architect (`output/01-scope-draft.md`) defines th
     - `CreateFeatureModal` (Client Component): form with optimistic update
 
 ## Data Fetching Strategy
-| Data | Where Fetched | Mechanism | Notes |
-| ---- | ------------- | --------- | ----- |
-| List of items | Server | fetch() in RSC | Cached with revalidateTag |
-| User preferences | Client | React Query | Stale-while-revalidate |
+| Data             | Where Fetched | Mechanism      | Notes                     |
+|------------------|---------------|----------------|---------------------------|
+| List of items    | Server        | fetch() in RSC | Cached with revalidateTag |
+| User preferences | Client        | React Query    | Stale-while-revalidate    |
 
 ## State Management
 - {State}: {location (local/Zustand/form)} — {reason}
@@ -57,8 +57,8 @@ The scope draft from the Scope Architect (`output/01-scope-draft.md`) defines th
 - **{FormName}**: fields ({list}), Zod schema ({key validations}), submission via {Server Action / API route}
 
 ## Loading, Empty, and Error States
-| Section | Loading | Empty | Error |
-| ------- | ------- | ----- | ----- |
+| Section   | Loading            | Empty                | Error            |
+|-----------|--------------------|----------------------|------------------|
 | {section} | Skeleton component | "No items yet" + CTA | Toast with retry |
 
 ## Third-party Components and Libraries
