@@ -245,13 +245,13 @@ persona: {id-da-persona}
 ## Technical Notes
 ```
 
-`teams/{nome}/_memory/runs.md`:
+`teams/{nome}/_memory/runs.json`:
 
-```markdown
-# Run History: {nome}
-
-| Date | Run ID | Topic | Output | Result |
-|------|--------|-------|--------|--------|
+```json
+{
+  "team": "{nome}",
+  "runs": []
+}
 ```
 
 ### Fase 4: Validação
@@ -290,7 +290,7 @@ Após criar todos os arquivos:
 ## Fluxo: Deletar Time
 
 1. Pergunte qual time deletar (liste os disponíveis)
-2. Mostre detalhes: nome, agentes, número de execuções (leia `_memory/runs.md`)
+2. Mostre detalhes: nome, agentes, número de execuções (leia `_memory/runs.json`)
 3. Confirme com `AskUserQuestion`: "Tem certeza? Isso não pode ser desfeito."
    - Sim, deletar
    - Não, cancelar

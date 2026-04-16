@@ -153,17 +153,21 @@ Após cada passo com próximo passo:
 
    Se nenhum feedback explícito ocorreu, não escreva `memories.md`.
 
-   ### 3b. `runs.md`: log cronológico reverso
+   ### 3b. `runs.json`: log cronológico reverso
 
-   Leia `teams/{nome}/_memory/runs.md`. Adicione uma nova linha no topo da tabela:
+   Leia `teams/{nome}/_memory/runs.json`. Adicione um novo objeto no **final** do array `runs`:
 
-   | Campo | Valor |
-   | ----- | ----- |
-   | Date | data de hoje (YYYY-MM-DD) |
-   | Run ID | o run_id desta execução |
-   | Topic | tópico ou request do usuário (1 frase) |
-   | Output | o que foi gerado (ex: "Feature spec: auth module") |
-   | Result | `Approved` / `Rejected` / `Aborted` |
+   ```json
+   {
+     "date": "YYYY-MM-DD",
+     "run_id": "{run_id desta execução}",
+     "topic": "{tópico ou request do usuário — 1 frase}",
+     "output": "{o que foi gerado — ex: 'Feature spec: auth module'}",
+     "result": "Approved | Rejected | Aborted"
+   }
+   ```
+
+   O array `runs` deve permanecer em **ordem cronológica reversa** (entrada mais recente primeiro).
 
 4. Apresente resumo de conclusão:
 
