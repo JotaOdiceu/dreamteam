@@ -2,7 +2,7 @@
 
 > 🌎 Languages: [Português](README.md) • English • [Español](README.es.md)
 
-**AI agent orchestration framework for Claude Code.**
+**AI agent orchestration framework.**
 
 Build agent teams with defined personalities, automated pipelines, and persistent memory, all inside your terminal, with no servers, no external APIs, and no complex setup.
 
@@ -10,7 +10,9 @@ Build agent teams with defined personalities, automated pipelines, and persisten
 
 ## What is Dreamteam?
 
-Dreamteam is a Markdown-based framework that teaches Claude (via Claude Code) to orchestrate multiple agents with distinct personas, run step-by-step pipelines, and accumulate memory across executions.
+Dreamteam is a file-based framework that teaches AI agents to orchestrate multiple agents with distinct personas, run step-by-step pipelines, and accumulate memory across executions.
+
+Compatible with **Claude Code** (Anthropic) and **Antigravity** (Google DeepMind). Just open the project in your preferred assistant and type `/dreamteam`.
 
 You define **who** your agents are (personas), **what** they do (tasks), and **in what order** (pipeline). Dreamteam handles the rest: context loading, sequential execution, review checkpoints, output versioning, and learning memory.
 
@@ -25,8 +27,12 @@ You define **who** your agents are (personas), **what** they do (tasks), and **i
 
 ## Prerequisites
 
-- **[Claude Code](https://claude.ai/code)**: Claude's CLI or desktop application (Anthropic)
-- No additional dependencies. No npm, pip, docker, or server configuration.
+Choose one of the supported platforms:
+
+- **[Claude Code](https://claude.ai/code)** (Anthropic) — via CLAUDE.md + `.claude/skills/` skill
+- **[Antigravity](https://antigravity.dev)** (Google DeepMind) — via `.agent/rules/` + `.agent/workflows/`
+
+No additional dependencies. No npm, pip, docker, or server configuration.
 
 ---
 
@@ -65,7 +71,7 @@ The assistant will ask for:
 - Output language (default: Portuguese, configurable to any language)
 - Your project or company context
 
-This information is saved to `_workspace/context.md` and loaded on every execution.
+This information is saved to `_workspace/context.json` and loaded on every execution.
 
 ---
 
@@ -128,7 +134,7 @@ teams/my-team/
 ├── settings.json      ← single source: personas + pipeline
 ├── _memory/
 │   ├── memories.md    ← team preferences and learnings
-│   └── runs.md        ← execution history
+│   └── runs.json      ← execution history
 ├── output/            ← generated outputs (gitignored)
 ├── personas/          ← local personas (optional)
 └── tasks/             ← pipeline task files
@@ -251,7 +257,7 @@ The Runner automatically validates:
 Each team accumulates memory across executions:
 
 - **`memories.md`**: preferences and patterns extracted from explicit user feedback (what they approved, rejected, or requested directly)
-- **`runs.md`**: chronological log of all executions with topic, output, and result
+- **`runs.json`**: chronological log of all executions with topic, output, and result
 
 Memory is loaded at the start of each execution and influences agent behavior.
 
@@ -315,7 +321,8 @@ dreamteam/
 │   └── runner.md                ← Pipeline Runner instructions (executes teams)
 │
 ├── _workspace/
-│   └── context.md               ← Your project/business context (set during onboarding)
+│   ├── context.example.json ← context template (copy and rename)
+│   └── context.json         ← your project/business context (gitignored)
 │
 ├── personas/                    ← Global reusable persona library
 │   └── strategist.persona.md    ← Included example

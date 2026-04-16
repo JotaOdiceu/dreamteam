@@ -2,7 +2,7 @@
 
 > 🌎 Languages: [Português](README.md) • [English](README.en.md) • Español
 
-**Framework de orquestación de agentes de IA para Claude Code.**
+**Framework de orquestación de agentes de IA.**
 
 Crea equipos de agentes con personalidades definidas, pipelines automatizados y memoria persistente, todo dentro de tu terminal, sin servidores, sin APIs externas y sin configuración compleja.
 
@@ -10,7 +10,9 @@ Crea equipos de agentes con personalidades definidas, pipelines automatizados y 
 
 ## Que es Dreamteam?
 
-Dreamteam es un framework basado en archivos Markdown que enseña a Claude (vía Claude Code) a orquestar múltiples agentes con personas distintas, ejecutar pipelines paso a paso y acumular memoria entre ejecuciones.
+Dreamteam es un framework basado en archivos que enseña a los agentes de IA a orquestar múltiples agentes con personas distintas, ejecutar pipelines paso a paso y acumular memoria entre ejecuciones.
+
+Compatible con **Claude Code** (Anthropic) y **Antigravity** (Google DeepMind). Solo abre el proyecto en tu asistente preferido y escribe `/dreamteam`.
 
 Tú defines **quiénes** son tus agentes (personas), **qué** hacen (tareas) y **en qué orden** (pipeline). Dreamteam se encarga del resto: carga de contexto, ejecución secuencial, checkpoints de revisión, versionado de outputs y memoria de aprendizaje.
 
@@ -25,8 +27,12 @@ Tú defines **quiénes** son tus agentes (personas), **qué** hacen (tareas) y *
 
 ## Prerrequisitos
 
-- **[Claude Code](https://claude.ai/code)**: CLI o aplicación de escritorio de Claude (Anthropic)
-- Sin dependencias adicionales. Sin npm, pip, docker ni configuración de servidor.
+Elige una de las plataformas compatibles:
+
+- **[Claude Code](https://claude.ai/code)** (Anthropic) — vía CLAUDE.md + skill `.claude/skills/`
+- **[Antigravity](https://antigravity.dev)** (Google DeepMind) — vía `.agent/rules/` + `.agent/workflows/`
+
+Sin dependencias adicionales. Sin npm, pip, docker ni configuración de servidor.
 
 ---
 
@@ -65,7 +71,7 @@ El asistente pedirá:
 - Idioma de los outputs (por defecto: Portugués, configurable a cualquier idioma)
 - Contexto de tu proyecto o empresa
 
-Esta información se guarda en `_workspace/context.md` y se carga en cada ejecución.
+Esta información se guarda en `_workspace/context.json` y se carga en cada ejecución.
 
 ---
 
@@ -133,7 +139,7 @@ teams/mi-equipo/
 ├── output/            ← outputs generados (gitignored)
 └── _memory/
     ├── memories.md    ← preferencias y aprendizajes del equipo
-    └── runs.md        ← historial de ejecuciones
+    └── runs.json      ← historial de ejecuciones
 ```
 
 **Formato de `settings.json`:**
@@ -251,7 +257,7 @@ El Runner valida automáticamente:
 Cada equipo acumula memoria entre ejecuciones:
 
 - **`memories.md`**: preferencias y patrones extraídos de feedback explícito del usuario (lo que aprobó, rechazó o pidió directamente)
-- **`runs.md`**: log cronológico de todas las ejecuciones con tema, output y resultado
+- **`runs.json`**: log cronológico de todas las ejecuciones con tema, output y resultado
 
 La memoria se carga al inicio de cada ejecución e influye en el comportamiento de los agentes.
 
@@ -315,7 +321,8 @@ dreamteam/
 │   └── runner.md                ← Instrucciones del Pipeline Runner (ejecuta equipos)
 │
 ├── _workspace/
-│   └── context.md               ← Contexto de tu proyecto/empresa (configurado en onboarding)
+│   ├── context.example.json ← plantilla de contexto (copia y renombra)
+│   └── context.json         ← contexto de tu proyecto/empresa (gitignored)
 │
 ├── personas/                    ← Biblioteca global de personas reutilizables
 │   └── estratega.persona.md     ← Ejemplo incluido
