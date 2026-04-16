@@ -1,10 +1,10 @@
 # Dreamteam
 
+> 🌎 Languages: [Português](README.md) • English • [Español](README.es.md)
+
 **AI agent orchestration framework for Claude Code.**
 
 Build agent teams with defined personalities, automated pipelines, and persistent memory, all inside your terminal, with no servers, no external APIs, and no complex setup.
-
-> Other versions of this document: [Português](README.md) . [Español](README.es.md)
 
 ---
 

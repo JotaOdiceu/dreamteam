@@ -1,10 +1,10 @@
 # Dreamteam
 
+> 🌎 Languages: Português • [English](README.en.md) • [Español](README.es.md)
+
 **Framework de orquestração de agentes de IA para o Claude Code.**
 
 Crie times de agentes com personalidades definidas, pipelines automatizados e memória persistente, tudo dentro do seu terminal, sem servidores, sem APIs externas e sem configuração complexa.
-
-> Versões deste documento: [English](README.en.md) . [Español](README.es.md)
 
 ---
 
