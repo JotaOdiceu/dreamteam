@@ -132,14 +132,14 @@ Um **time** é um grupo de agentes com um pipeline definido. Fica em `teams/{nom
 ```markdown
 teams/meu-time/
 ├── settings.json      ← fonte única: personas + pipeline do time
-├── personas/          ← personas locais (opcionais)
-├── tasks/             ← arquivos de tarefas do pipeline
-│   ├── tarefa-1.md
-│   └── tarefa-2.md
+├── _memory/
+│   ├── memories.json  ← preferências e aprendizados do time
+│   └── runs.json      ← histórico de execuções
 ├── output/            ← outputs gerados (gitignored)
-└── _memory/
-    ├── memories.md    ← preferências e aprendizados do time
-    └── runs.json      ← histórico de execuções
+├── personas/          ← personas locais (opcionais)
+└── tasks/             ← arquivos de tarefas do pipeline
+    ├── tarefa-1.md
+    └── tarefa-2.md
 ```
 
 **Formato do `settings.json`:**
@@ -256,7 +256,7 @@ O Runner valida automaticamente:
 
 Cada time acumula memória entre execuções:
 
-- **`memories.md`**: preferências e padrões extraídos de feedback explícito do usuário (o que aprovou, rejeitou ou pediu diretamente)
+- **`memories.json`**: preferências e padrões extraídos de feedback explícito do usuário (o que aprovou, rejeitou ou pediu diretamente)
 - **`runs.json`**: log cronológico de todas as execuções com tema, output e resultado
 
 A memória é carregada no início de cada execução e influencia o comportamento dos agentes.

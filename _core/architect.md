@@ -231,18 +231,16 @@ persona: {id-da-persona}
 
 #### 5. Memória do time
 
-`teams/{nome}/_memory/memories.md`:
+`teams/{nome}/_memory/memories.json`:
 
-```markdown
-# Team Memory: {nome}
-
-## Writing Style
-
-## Structural Preferences
-
-## Explicit Prohibitions
-
-## Technical Notes
+```json
+{
+  "team": "{nome}",
+  "writing_style": [],
+  "structural_preferences": [],
+  "explicit_prohibitions": [],
+  "technical_notes": []
+}
 ```
 
 `teams/{nome}/_memory/runs.json`:

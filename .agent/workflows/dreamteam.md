@@ -85,7 +85,7 @@ When the user wants to run a team:
    - `source: "global"`: read `{file}` (e.g. `personas/scope-architect.persona.md`)
    - `source: "local"`: read `teams/{name}/{file}`
 3. Read workspace context from `_workspace/context.json`
-4. Read team memory from `teams/{name}/_memory/memories.md` (if it exists)
+4. Read team memory from `teams/{name}/_memory/memories.json` (if it exists)
 5. Read runner instructions from `_core/runner.md`
 6. Execute the pipeline step by step — inline, sequentially, never skipping steps
 
@@ -106,7 +106,7 @@ When the user accesses the persona library:
 - ALWAYS present checkpoints to the user — never skip them
 - ALWAYS save outputs to `teams/{name}/output/`
 - When switching personas during inline execution, clearly announce which agent is now speaking
-- After each pipeline run, update `teams/{name}/_memory/memories.md` with key learnings
+- After each pipeline run, update `teams/{name}/_memory/memories.json` with key learnings
 - Output language: use the language defined in workspace context
 - NEVER ask more than one question per message
 - All tasks run inline and sequentially — never skip or defer steps

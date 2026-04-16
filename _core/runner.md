@@ -8,7 +8,7 @@ Antes de começar, você já carregou (via SKILL.md):
 
 - `teams/{nome}/settings.json`: configuração completa do time (personas + pipeline)
 - Contexto do workspace de `_workspace/context.json`
-- Memória do time de `teams/{nome}/_memory/memories.md` (se existir)
+- Memória do time de `teams/{nome}/_memory/memories.json` (se existir)
 
 **Passos adicionais de inicialização:**
 
@@ -16,7 +16,7 @@ Antes de começar, você já carregou (via SKILL.md):
    - Se `source: "global"` leia o arquivo em `{file}` (ex: `personas/scope-architect.persona.md`)
    - Se `source: "local"` leia o arquivo em `teams/{nome}/{file}` (ex: `teams/{nome}/personas/custom.persona.md`)
    - Registre em memória: id, name, title, icon, e o conteúdo completo do `.persona.md`
-2. Verifique se `teams/{nome}/_memory/memories.md` existe; se não, crie com o template vazio
+2. Verifique se `teams/{nome}/_memory/memories.json` existe; se não, crie com o template vazio
 3. Gere o Run ID: `YYYY-MM-DD-HHmmss` (ex: `2026-04-16-143022`)
 4. Crie a pasta de output escrevendo qualquer arquivo dentro de `teams/{nome}/output/{run_id}/`
 5. Anuncie o início:
@@ -142,16 +142,16 @@ Após cada passo com próximo passo:
 2. Salve outputs finais na pasta do run
 3. Atualize a memória do time:
 
-   ### 3a. `memories.md`: preferências vivas
+   ### 3a. `memories.json`: preferências vivas
 
-   Leia `teams/{nome}/_memory/memories.md`. Identifique do run apenas **feedback explícito do usuário**: aprovações com comentário, rejeições com motivo, pedidos diretos ("prefiro X", "não quero Y"). Nunca infira preferências.
+   Leia `teams/{nome}/_memory/memories.json`. Identifique do run apenas **feedback explícito do usuário**: aprovações com comentário, rejeições com motivo, pedidos diretos ("prefiro X", "não quero Y"). Nunca infira preferências.
 
    Para cada item:
-   - Se memória equivalente já existe e é compatível: ignore (sem duplicar)
-   - Se existe mas contradiz: substitua pela versão mais nova
-   - Se não existe: adicione na seção semântica correta
+   - Se memória equivalente já existir no array correspondente: ignore (sem duplicar)
+   - Se existir mas contradiz: substitua pela versão mais nova
+   - Se não existir: adicione no array correspondente (`writing_style`, `structural_preferences`, `explicit_prohibitions` ou `technical_notes`)
 
-   Se nenhum feedback explícito ocorreu, não escreva `memories.md`.
+   Se nenhum feedback explícito ocorreu, não escreva `memories.json`.
 
    ### 3b. `runs.json`: log cronológico
 

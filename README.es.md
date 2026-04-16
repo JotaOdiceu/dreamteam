@@ -132,14 +132,14 @@ Un **equipo** es un grupo de agentes con un pipeline definido. Vive en `teams/{n
 ```markdown
 teams/mi-equipo/
 ├── settings.json      ← fuente única: personas + pipeline del equipo
-├── personas/          ← personas locales (opcionales)
-├── tasks/             ← archivos de tareas del pipeline
-│   ├── tarea-1.md
-│   └── tarea-2.md
+├── _memory/
+│   ├── memories.json  ← preferencias y aprendizajes del equipo
+│   └── runs.json      ← historial de ejecuciones
 ├── output/            ← outputs generados (gitignored)
-└── _memory/
-    ├── memories.md    ← preferencias y aprendizajes del equipo
-    └── runs.json      ← historial de ejecuciones
+├── personas/          ← personas locales (opcionales)
+└── tasks/             ← archivos de tareas del pipeline
+    ├── tarea-1.md
+    └── tarea-2.md
 ```
 
 **Formato de `settings.json`:**
@@ -256,7 +256,7 @@ El Runner valida automáticamente:
 
 Cada equipo acumula memoria entre ejecuciones:
 
-- **`memories.md`**: preferencias y patrones extraídos de feedback explícito del usuario (lo que aprobó, rechazó o pidió directamente)
+- **`memories.json`**: preferencias y patrones extraídos de feedback explícito del usuario (lo que aprobó, rechazó o pidió directamente)
 - **`runs.json`**: log cronológico de todas las ejecuciones con tema, output y resultado
 
 La memoria se carga al inicio de cada ejecución e influye en el comportamiento de los agentes.

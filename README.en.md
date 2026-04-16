@@ -133,7 +133,7 @@ A **team** is a group of agents with a defined pipeline. Lives in `teams/{name}/
 teams/my-team/
 ├── settings.json      ← single source: personas + pipeline
 ├── _memory/
-│   ├── memories.md    ← team preferences and learnings
+│   ├── memories.json  ← team preferences and learnings
 │   └── runs.json      ← execution history
 ├── output/            ← generated outputs (gitignored)
 ├── personas/          ← local personas (optional)
@@ -256,7 +256,7 @@ The Runner automatically validates:
 
 Each team accumulates memory across executions:
 
-- **`memories.md`**: preferences and patterns extracted from explicit user feedback (what they approved, rejected, or requested directly)
+- **`memories.json`**: preferences and patterns extracted from explicit user feedback (what they approved, rejected, or requested directly)
 - **`runs.json`**: chronological log of all executions with topic, output, and result
 
 Memory is loaded at the start of each execution and influences agent behavior.
