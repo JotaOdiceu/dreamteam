@@ -125,52 +125,70 @@ A **team** is a group of agents with a defined pipeline. Lives in `teams/{name}/
 
 ```markdown
 teams/my-team/
-├── team.yaml          ← team definition and pipeline
-├── roster.csv         ← member list and their personas
-├── personas/          ← local personas (optional)
-├── tasks/             ← pipeline task files
-│   ├── task-1.md
-│   └── task-2.md
+├── settings.json      ← single source: personas + pipeline
+├── _memory/
+│   ├── memories.md    ← team preferences and learnings
+│   └── runs.md        ← execution history
 ├── output/            ← generated outputs (gitignored)
-└── _memory/
-    ├── memories.md    ← team preferences and learnings
-    └── runs.md        ← execution history
+├── personas/          ← local personas (optional)
+└── tasks/             ← pipeline task files
+    ├── task-1.md
+    └── task-2.md
 ```
 
-**`team.yaml` format:**
+**`settings.json` format:**
 
-```yaml
-name: "Strategic Council"
-description: "Advisor board for analyzing executive decisions."
-icon: "🏛️"
-version: "1.0.0"
+```json
+{
+  "icon": "🏛️",
+  "name": "Strategic Council",
+  "description": "Advisor board for analyzing executive decisions.",
 
-personas:
-  - id: strategist
-    source: global          # uses persona from global library
-  - id: moderator
-    source: local           # uses team-local persona
+  "personas": [
+    {
+      "id": "strategist",
+      "name": "Strategist",
+      "title": "VP of Strategy",
+      "icon": "📈",
+      "source": "global",
+      "file": "personas/strategist.persona.md"
+    },
+    {
+      "id": "moderator",
+      "name": "Moderator",
+      "title": "Council Secretary",
+      "icon": "✍️",
+      "source": "local",
+      "file": "teams/council/personas/moderator.persona.md"
+    }
+  ],
 
-pipeline:
-  - id: briefing
-    name: "Challenge Collection"
-    persona: moderator
-    task: tasks/briefing.md
-    execution: inline
-    output: output/briefing.md
-
-  - id: review
-    type: checkpoint
-    name: "Briefing Review"
-    message: "Review the briefing above. Does it look correct?"
-
-  - id: debate
-    name: "Strategic Debate"
-    persona: strategist
-    task: tasks/debate.md
-    execution: inline
-    input: output/briefing.md
-    output: output/debate.md
+  "pipeline": [
+    {
+      "id": "briefing",
+      "name": "Challenge Collection",
+      "persona": "moderator",
+      "task": "tasks/briefing.md",
+      "execution": "inline",
+      "output": "output/briefing.md"
+    },
+    {
+      "id": "review",
+      "type": "checkpoint",
+      "name": "Briefing Review",
+      "message": "Review the briefing above. Does it look correct?"
+    },
+    {
+      "id": "debate",
+      "name": "Strategic Debate",
+      "persona": "strategist",
+      "task": "tasks/debate.md",
+      "execution": "inline",
+      "input": "output/briefing.md",
+      "output": "output/debate.md"
+    }
+  ]
+}
 ```
 
 ---
@@ -212,13 +230,13 @@ Markdown document with sections: Context, Central Question, Constraints.
 
 ### Pipeline
 
-The pipeline is the step sequence defined in `team.yaml`. Each step can be:
+The pipeline is the array of steps defined in `settings.json`. Each step can be:
 
-| Type | What it does |
-| --------------------- | -------------------------------------------------- |
-| `execution: inline` | Agent executes and presents the result in the chat |
-| `execution: subagent` | Agent works in the background |
-| `type: checkpoint` | Pauses execution and waits for user approval |
+| Type                      | What it does                                       |
+|---------------------------|----------------------------------------------------|
+| `"execution": "inline"`   | Agent executes and presents the result in the chat |
+| `"execution": "subagent"` | Agent works in the background                      |
+| `"type": "checkpoint"`    | Pauses execution and waits for user approval       |
 
 The Runner automatically validates:
 
@@ -253,30 +271,30 @@ Opens the main menu with options to create, run, edit teams, and manage personas
 
 ### Team commands
 
-| Command | What it does |
-| -------------------------- | ---------------------------------------- |
-| `/dreamteam create` | Launches the wizard to create a new team |
-| `/dreamteam teams` | Lists all teams in `teams/` |
-| `/dreamteam run <name>` | Runs a team's pipeline |
-| `/dreamteam edit <name>` | Edits an existing team |
-| `/dreamteam delete <name>` | Deletes a team (with confirmation) |
+| Command                    | What it does                             |
+|----------------------------|------------------------------------------|
+| `/dreamteam create`        | Launches the wizard to create a new team |
+| `/dreamteam teams`         | Lists all teams in `teams/`              |
+| `/dreamteam run <name>`    | Runs a team's pipeline                   |
+| `/dreamteam edit <name>`   | Edits an existing team                   |
+| `/dreamteam delete <name>` | Deletes a team (with confirmation)       |
 
 ### Persona commands
 
-| Command | What it does |
-| ----------------------------------- | ------------------------------ |
-| `/dreamteam personas` | Opens the persona library |
-| `/dreamteam personas new` | Creates a new global persona |
-| `/dreamteam personas edit <name>` | Edits an existing persona |
-| `/dreamteam personas delete <name>` | Removes a persona |
+| Command                             | What it does                 |
+|-------------------------------------|------------------------------|
+| `/dreamteam personas`               | Opens the persona library    |
+| `/dreamteam personas new`           | Creates a new global persona |
+| `/dreamteam personas edit <name>`   | Edits an existing persona    |
+| `/dreamteam personas delete <name>` | Removes a persona            |
 
 ### Workspace and settings
 
-| Command | What it does |
-| -------------------- | --------------------------------------- |
-| `/dreamteam context` | View or edit the workspace context |
-| `/dreamteam help` | Displays the full help text |
-| `/dreamteam reset` | Resets all settings (with confirmation) |
+| Command              | What it does                            |
+|----------------------|-----------------------------------------|
+| `/dreamteam context` | View or edit the workspace context      |
+| `/dreamteam help`    | Displays the full help text             |
+| `/dreamteam reset`   | Resets all settings (with confirmation) |
 
 ---
 
@@ -304,12 +322,11 @@ dreamteam/
 │
 └── teams/                       ← Your teams live here
     └── my-team/
-        ├── team.yaml
-        ├── roster.csv
-        ├── personas/
-        ├── tasks/
+        ├── settings.json
+        ├── _memory/
         ├── output/
-        └── _memory/
+        ├── personas/
+        └── tasks/
 ```
 
 > **Do not manually modify** files in `_core/` unless you know what you are doing. `CLAUDE.md`, `_workspace/`, and `personas/` files can be freely edited.

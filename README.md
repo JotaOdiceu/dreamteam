@@ -125,8 +125,7 @@ Um **time** é um grupo de agentes com um pipeline definido. Fica em `teams/{nom
 
 ```markdown
 teams/meu-time/
-├── team.yaml          ← definição do time e pipeline
-├── roster.csv         ← lista de membros e suas personas
+├── settings.json      ← fonte única: personas + pipeline do time
 ├── personas/          ← personas locais (opcionais)
 ├── tasks/             ← arquivos de tarefas do pipeline
 │   ├── tarefa-1.md
@@ -137,40 +136,59 @@ teams/meu-time/
     └── runs.md        ← histórico de execuções
 ```
 
-**Formato do `team.yaml`:**
+**Formato do `settings.json`:**
 
-```yaml
-name: "Conselho Estratégico"
-description: "Mesa de conselheiros para análise de decisões executivas."
-icon: "🏛️"
-version: "1.0.0"
+```json
+{
+  "icon": "🏛️",
+  "name": "Conselho Estratégico",
+  "description": "Mesa de conselheiros para análise de decisões executivas.",
 
-personas:
-  - id: estrategista
-    source: global          # usa persona da biblioteca global
-  - id: moderador
-    source: local           # usa persona local do time
+  "personas": [
+    {
+      "id": "estrategista",
+      "name": "Estrategista",
+      "title": "VP de Estratégia",
+      "icon": "📈",
+      "source": "global",
+      "file": "personas/strategist.persona.md"
+    },
+    {
+      "id": "moderador",
+      "name": "Moderador",
+      "title": "Secretário do Conselho",
+      "icon": "✍️",
+      "source": "local",
+      "file": "teams/conselho/personas/moderador.persona.md"
+    }
+  ],
 
-pipeline:
-  - id: briefing
-    name: "Coleta do Desafio"
-    persona: moderador
-    task: tasks/briefing.md
-    execution: inline
-    output: output/briefing.md
-
-  - id: revisao
-    type: checkpoint
-    name: "Revisão do Briefing"
-    message: "Revise o briefing acima. Está correto?"
-
-  - id: debate
-    name: "Debate Estratégico"
-    persona: estrategista
-    task: tasks/debate.md
-    execution: inline
-    input: output/briefing.md
-    output: output/debate.md
+  "pipeline": [
+    {
+      "id": "briefing",
+      "name": "Coleta do Desafio",
+      "persona": "moderador",
+      "task": "tasks/briefing.md",
+      "execution": "inline",
+      "output": "output/briefing.md"
+    },
+    {
+      "id": "revisao",
+      "type": "checkpoint",
+      "name": "Revisão do Briefing",
+      "message": "Revise o briefing acima. Está correto?"
+    },
+    {
+      "id": "debate",
+      "name": "Debate Estratégico",
+      "persona": "estrategista",
+      "task": "tasks/debate.md",
+      "execution": "inline",
+      "input": "output/briefing.md",
+      "output": "output/debate.md"
+    }
+  ]
+}
 ```
 
 ---
@@ -212,13 +230,13 @@ Documento Markdown com seções: Contexto, Pergunta Central, Restrições.
 
 ### Pipeline
 
-O pipeline é a sequência de passos definida no `team.yaml`. Cada passo pode ser:
+O pipeline é o array de passos definido no `settings.json`. Cada passo pode ser:
 
-| Tipo | O que faz |
-| --------------------- | ---------------------------------------------- |
-| `execution: inline` | Agente executa e apresenta o resultado no chat |
-| `execution: subagent` | Agente trabalha em segundo plano (background) |
-| `type: checkpoint` | Pausa a execução e espera aprovação do usuário |
+| Tipo                      | O que faz                                      |
+|---------------------------|------------------------------------------------|
+| `"execution": "inline"`   | Agente executa e apresenta o resultado no chat |
+| `"execution": "subagent"` | Agente trabalha em segundo plano (background)  |
+| `"type": "checkpoint"`    | Pausa a execução e espera aprovação do usuário |
 
 O Runner valida automaticamente:
 
@@ -253,30 +271,30 @@ Abre o menu principal com as opções de criar, executar, editar times e gerenci
 
 ### Comandos de times
 
-| Comando | O que faz |
-| -------------------------- | ------------------------------------------- |
-| `/dreamteam create` | Inicia o assistente para criar um novo time |
-| `/dreamteam teams` | Lista todos os times em `teams/` |
-| `/dreamteam run <nome>` | Executa o pipeline do time |
-| `/dreamteam edit <nome>` | Edita um time existente |
-| `/dreamteam delete <nome>` | Deleta um time (com confirmação) |
+| Comando                    | O que faz                                   |
+|----------------------------|---------------------------------------------|
+| `/dreamteam create`        | Inicia o assistente para criar um novo time |
+| `/dreamteam teams`         | Lista todos os times em `teams/`            |
+| `/dreamteam run <nome>`    | Executa o pipeline do time                  |
+| `/dreamteam edit <nome>`   | Edita um time existente                     |
+| `/dreamteam delete <nome>` | Deleta um time (com confirmação)            |
 
 ### Comandos de personas
 
-| Comando | O que faz |
-| ----------------------------------- | ----------------------------- |
-| `/dreamteam personas` | Abre a biblioteca de personas |
-| `/dreamteam personas new` | Cria uma nova persona global |
-| `/dreamteam personas edit <nome>` | Edita uma persona existente |
-| `/dreamteam personas delete <nome>` | Remove uma persona |
+| Comando                             | O que faz                     |
+|-------------------------------------|-------------------------------|
+| `/dreamteam personas`               | Abre a biblioteca de personas |
+| `/dreamteam personas new`           | Cria uma nova persona global  |
+| `/dreamteam personas edit <nome>`   | Edita uma persona existente   |
+| `/dreamteam personas delete <nome>` | Remove uma persona            |
 
 ### Workspace e configurações
 
-| Comando | O que faz |
-| -------------------- | ----------------------------------------------- |
-| `/dreamteam context` | Ver ou editar o contexto do workspace |
-| `/dreamteam help` | Exibe o texto de ajuda completo |
-| `/dreamteam reset` | Reseta todas as configurações (com confirmação) |
+| Comando              | O que faz                                       |
+|----------------------|-------------------------------------------------|
+| `/dreamteam context` | Ver ou editar o contexto do workspace           |
+| `/dreamteam help`    | Exibe o texto de ajuda completo                 |
+| `/dreamteam reset`   | Reseta todas as configurações (com confirmação) |
 
 ---
 
@@ -304,8 +322,7 @@ dreamteam/
 │
 └── teams/                       ← Seus times ficam aqui
     └── meu-time/
-        ├── team.yaml
-        ├── roster.csv
+        ├── settings.json
         ├── personas/
         ├── tasks/
         ├── output/

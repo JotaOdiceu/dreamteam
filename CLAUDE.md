@@ -20,11 +20,11 @@ _workspace/     — Contexto persistente do seu negócio/projeto
 personas/       — Biblioteca global de personas reutilizáveis
 teams/          — Times criados pelo usuário
 teams/{nome}/
-  team.yaml         — Definição do time e pipeline
+  settings.json     — Definição do time e pipeline
+  _memory/          — Memória persistente do time
+  output/           — Saídas geradas
   personas/         — Personas locais (exclusivas deste time)
   tasks/            — Arquivos de tarefas do pipeline
-  output/           — Saídas geradas
-  _memory/          — Memória persistente do time
 ```
 
 ## Como Funciona
@@ -43,5 +43,5 @@ A grande diferença do Dreamteam: personas são **reutilizáveis entre times**. 
 
 - Use sempre os comandos `/dreamteam` para interagir com o sistema
 - Não edite arquivos em `_core/` manualmente
-- Arquivos `team.yaml` podem ser editados manualmente se necessário
+- O arquivo `settings.json` de cada time pode ser editado manualmente se necessário
 - O contexto em `_workspace/context.md` é carregado em todas as execuções

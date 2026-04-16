@@ -1,0 +1,94 @@
+{
+  "name": "Feature Scoping Team",
+  "description": "Produces a complete technical specification for a new feature, covering API design, frontend implementation, and security review.",
+  "icon": "📐",
+  "version": "1.0.0",
+
+  "personas": [
+    {
+      "id": "scope-architect",
+      "name": "Scope Architect",
+      "title": "Technical Scope and Specification Architect",
+      "icon": "📐",
+      "source": "global",
+      "file": "personas/scope-architect.persona.md"
+    },
+    {
+      "id": "backend-engineer",
+      "name": "Backend Engineer",
+      "title": "Senior Backend Engineer (NestJS)",
+      "icon": "⚙️",
+      "source": "global",
+      "file": "personas/backend-engineer.persona.md"
+    },
+    {
+      "id": "frontend-engineer",
+      "name": "Frontend Engineer",
+      "title": "Senior Frontend Engineer (Next.js)",
+      "icon": "🖥️",
+      "source": "global",
+      "file": "personas/frontend-engineer.persona.md"
+    },
+    {
+      "id": "security-engineer",
+      "name": "Security Engineer",
+      "title": "Application Security Engineer",
+      "icon": "🔒",
+      "source": "global",
+      "file": "personas/security-engineer.persona.md"
+    }
+  ],
+
+  "pipeline": [
+    {
+      "id": "intake",
+      "name": "Feature Intake and Scope Draft",
+      "persona": "scope-architect",
+      "task": "tasks/01-intake.md",
+      "execution": "inline",
+      "output": "output/01-scope-draft.md"
+    },
+    {
+      "id": "review-draft",
+      "type": "checkpoint",
+      "name": "Scope Draft Review",
+      "message": "The Scope Architect produced the draft scope above. Review it and confirm it captures the feature correctly before the specialists dive in. Request changes or approve to continue."
+    },
+    {
+      "id": "backend-spec",
+      "name": "Backend API and Data Model Specification",
+      "persona": "backend-engineer",
+      "task": "tasks/02-backend-spec.md",
+      "execution": "inline",
+      "input": "output/01-scope-draft.md",
+      "output": "output/02-backend-spec.md"
+    },
+    {
+      "id": "frontend-spec",
+      "name": "Frontend Implementation Specification",
+      "persona": "frontend-engineer",
+      "task": "tasks/03-frontend-spec.md",
+      "execution": "inline",
+      "input": "output/01-scope-draft.md",
+      "output": "output/03-frontend-spec.md"
+    },
+    {
+      "id": "security-review",
+      "name": "Security Threat Review",
+      "persona": "security-engineer",
+      "task": "tasks/04-security-review.md",
+      "execution": "inline",
+      "input": "output/01-scope-draft.md",
+      "output": "output/04-security-review.md"
+    },
+    {
+      "id": "final-spec",
+      "name": "Final Technical Specification",
+      "persona": "scope-architect",
+      "task": "tasks/05-final-spec.md",
+      "execution": "inline",
+      "input": "output/01-scope-draft.md",
+      "output": "output/05-final-spec.md"
+    }
+  ]
+}

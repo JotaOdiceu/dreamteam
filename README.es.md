@@ -125,8 +125,7 @@ Un **equipo** es un grupo de agentes con un pipeline definido. Vive en `teams/{n
 
 ```markdown
 teams/mi-equipo/
-├── team.yaml          ← definición del equipo y pipeline
-├── roster.csv         ← lista de miembros y sus personas
+├── settings.json      ← fuente única: personas + pipeline del equipo
 ├── personas/          ← personas locales (opcionales)
 ├── tasks/             ← archivos de tareas del pipeline
 │   ├── tarea-1.md
@@ -137,40 +136,59 @@ teams/mi-equipo/
     └── runs.md        ← historial de ejecuciones
 ```
 
-**Formato de `team.yaml`:**
+**Formato de `settings.json`:**
 
-```yaml
-name: "Consejo Estratégico"
-description: "Mesa de consejeros para análisis de decisiones ejecutivas."
-icon: "🏛️"
-version: "1.0.0"
+```json
+{
+  "icon": "🏛️",
+  "name": "Consejo Estratégico",
+  "description": "Mesa de consejeros para análisis de decisiones ejecutivas.",
 
-personas:
-  - id: estratega
-    source: global          # usa persona de la biblioteca global
-  - id: moderador
-    source: local           # usa persona local del equipo
+  "personas": [
+    {
+      "id": "estratega",
+      "name": "Estratega",
+      "title": "VP de Estrategia",
+      "icon": "📈",
+      "source": "global",
+      "file": "personas/strategist.persona.md"
+    },
+    {
+      "id": "moderador",
+      "name": "Moderador",
+      "title": "Secretario del Consejo",
+      "icon": "✍️",
+      "source": "local",
+      "file": "teams/consejo/personas/moderador.persona.md"
+    }
+  ],
 
-pipeline:
-  - id: briefing
-    name: "Recolección del Desafío"
-    persona: moderador
-    task: tasks/briefing.md
-    execution: inline
-    output: output/briefing.md
-
-  - id: revision
-    type: checkpoint
-    name: "Revisión del Briefing"
-    message: "Revisa el briefing anterior. Se ve correcto?"
-
-  - id: debate
-    name: "Debate Estratégico"
-    persona: estratega
-    task: tasks/debate.md
-    execution: inline
-    input: output/briefing.md
-    output: output/debate.md
+  "pipeline": [
+    {
+      "id": "briefing",
+      "name": "Recolección del Desafío",
+      "persona": "moderador",
+      "task": "tasks/briefing.md",
+      "execution": "inline",
+      "output": "output/briefing.md"
+    },
+    {
+      "id": "revision",
+      "type": "checkpoint",
+      "name": "Revisión del Briefing",
+      "message": "Revisa el briefing anterior. Se ve correcto?"
+    },
+    {
+      "id": "debate",
+      "name": "Debate Estratégico",
+      "persona": "estratega",
+      "task": "tasks/debate.md",
+      "execution": "inline",
+      "input": "output/briefing.md",
+      "output": "output/debate.md"
+    }
+  ]
+}
 ```
 
 ---
@@ -212,13 +230,13 @@ Documento Markdown con secciones: Contexto, Pregunta Central, Restricciones.
 
 ### Pipeline
 
-El pipeline es la secuencia de pasos definida en `team.yaml`. Cada paso puede ser:
+El pipeline es el array de pasos definido en `settings.json`. Cada paso puede ser:
 
-| Tipo | Que hace |
-| --------------------- | ---------------------------------------------------- |
-| `execution: inline` | El agente ejecuta y presenta el resultado en el chat |
-| `execution: subagent` | El agente trabaja en segundo plano |
-| `type: checkpoint` | Pausa la ejecución y espera aprobación del usuario |
+| Tipo                      | Que hace                                             |
+|---------------------------|------------------------------------------------------|
+| `"execution": "inline"`   | El agente ejecuta y presenta el resultado en el chat |
+| `"execution": "subagent"` | El agente trabaja en segundo plano                   |
+| `"type": "checkpoint"`    | Pausa la ejecución y espera aprobación del usuario   |
 
 El Runner valida automáticamente:
 
@@ -253,30 +271,30 @@ Abre el menú principal con opciones para crear, ejecutar, editar equipos y gest
 
 ### Comandos de equipos
 
-| Comando | Que hace |
-| ---------------------------- | --------------------------------------------- |
-| `/dreamteam create` | Lanza el asistente para crear un nuevo equipo |
-| `/dreamteam teams` | Lista todos los equipos en `teams/` |
-| `/dreamteam run <nombre>` | Ejecuta el pipeline de un equipo |
-| `/dreamteam edit <nombre>` | Edita un equipo existente |
-| `/dreamteam delete <nombre>` | Elimina un equipo (con confirmación) |
+| Comando                      | Que hace                                      |
+|------------------------------|-----------------------------------------------|
+| `/dreamteam create`          | Lanza el asistente para crear un nuevo equipo |
+| `/dreamteam teams`           | Lista todos los equipos en `teams/`           |
+| `/dreamteam run <nombre>`    | Ejecuta el pipeline de un equipo              |
+| `/dreamteam edit <nombre>`   | Edita un equipo existente                     |
+| `/dreamteam delete <nombre>` | Elimina un equipo (con confirmación)          |
 
 ### Comandos de personas
 
-| Comando | Que hace |
-| ------------------------------------- | ------------------------------ |
-| `/dreamteam personas` | Abre la biblioteca de personas |
-| `/dreamteam personas new` | Crea una nueva persona global |
-| `/dreamteam personas edit <nombre>` | Edita una persona existente |
-| `/dreamteam personas delete <nombre>` | Elimina una persona |
+| Comando                               | Que hace                       |
+|---------------------------------------|--------------------------------|
+| `/dreamteam personas`                 | Abre la biblioteca de personas |
+| `/dreamteam personas new`             | Crea una nueva persona global  |
+| `/dreamteam personas edit <nombre>`   | Edita una persona existente    |
+| `/dreamteam personas delete <nombre>` | Elimina una persona            |
 
 ### Workspace y configuración
 
-| Comando | Que hace |
-| -------------------- | ------------------------------------------------ |
-| `/dreamteam context` | Ver o editar el contexto del workspace |
-| `/dreamteam help` | Muestra el texto de ayuda completo |
-| `/dreamteam reset` | Resetea toda la configuración (con confirmación) |
+| Comando              | Que hace                                         |
+|----------------------|--------------------------------------------------|
+| `/dreamteam context` | Ver o editar el contexto del workspace           |
+| `/dreamteam help`    | Muestra el texto de ayuda completo               |
+| `/dreamteam reset`   | Resetea toda la configuración (con confirmación) |
 
 ---
 
@@ -304,8 +322,7 @@ dreamteam/
 │
 └── teams/                       ← Tus equipos viven aquí
     └── mi-equipo/
-        ├── team.yaml
-        ├── roster.csv
+        ├── settings.json
         ├── personas/
         ├── tasks/
         ├── output/
