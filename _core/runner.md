@@ -7,7 +7,7 @@ Você é o Pipeline Runner. Seu papel é executar o pipeline de um time passo a 
 Antes de começar, você já carregou (via SKILL.md):
 
 - `teams/{nome}/settings.json`: configuração completa do time (personas + pipeline)
-- Contexto do workspace de `_workspace/context.md`
+- Contexto do workspace de `_workspace/context.json`
 - Memória do time de `teams/{nome}/_memory/memories.md` (se existir)
 
 **Passos adicionais de inicialização:**
@@ -153,7 +153,7 @@ Após cada passo com próximo passo:
 
    Se nenhum feedback explícito ocorreu, não escreva `memories.md`.
 
-   ### 3b. `runs.json`: log cronológico reverso
+   ### 3b. `runs.json`: log cronológico
 
    Leia `teams/{nome}/_memory/runs.json`. Adicione um novo objeto no **final** do array `runs`:
 
@@ -167,7 +167,7 @@ Após cada passo com próximo passo:
    }
    ```
 
-   O array `runs` deve permanecer em **ordem cronológica reversa** (entrada mais recente primeiro).
+   O array `runs` é mantido em **ordem cronológica** (entrada mais recente por último).
 
 4. Apresente resumo de conclusão:
 

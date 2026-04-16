@@ -44,4 +44,4 @@ A grande diferença do Dreamteam: personas são **reutilizáveis entre times**. 
 - Use sempre os comandos `/dreamteam` para interagir com o sistema
 - Não edite arquivos em `_core/` manualmente
 - O arquivo `settings.json` de cada time pode ser editado manualmente se necessário
-- O contexto em `_workspace/context.md` é carregado em todas as execuções
+- O contexto em `_workspace/context.json` é carregado em todas as execuções
