@@ -1,0 +1,70 @@
+name: "Feature Scoping Team"
+description: "Produces a complete technical specification for a new feature, covering API design, frontend implementation, and security review."
+icon: "📐"
+version: "1.0.0"
+
+# Personas used by this team.
+# All are sourced from the global library (personas/).
+personas:
+  - id: scope-architect
+    source: global
+  - id: backend-engineer
+    source: global
+  - id: frontend-engineer
+    source: global
+  - id: security-engineer
+    source: global
+
+pipeline:
+  # Step 1: collect the feature request and produce a raw scope draft.
+  - id: intake
+    name: "Feature Intake and Scope Draft"
+    persona: scope-architect
+    task: tasks/01-intake.md
+    execution: inline
+    output: output/01-scope-draft.md
+
+  # Checkpoint: user reviews the draft before specialists dive in.
+  - id: review-draft
+    type: checkpoint
+    name: "Scope Draft Review"
+    message: |
+      The Scope Architect has produced a draft scope above.
+      Review it and confirm it captures the feature correctly before the specialists analyze it.
+      You can request changes or approve to continue.
+
+  # Step 2: backend engineer specifies the API contract and data model.
+  - id: backend-spec
+    name: "Backend API and Data Model Specification"
+    persona: backend-engineer
+    task: tasks/02-backend-spec.md
+    execution: inline
+    input: output/01-scope-draft.md
+    output: output/02-backend-spec.md
+
+  # Step 3: frontend engineer specifies the UI implementation plan.
+  - id: frontend-spec
+    name: "Frontend Implementation Specification"
+    persona: frontend-engineer
+    task: tasks/03-frontend-spec.md
+    execution: inline
+    input: output/01-scope-draft.md
+    output: output/03-frontend-spec.md
+
+  # Step 4: security engineer reviews the full scope for threats.
+  - id: security-review
+    name: "Security Threat Review"
+    persona: security-engineer
+    task: tasks/04-security-review.md
+    execution: inline
+    input: output/01-scope-draft.md
+    output: output/04-security-review.md
+
+  # Step 5: scope architect consolidates everything into the final spec.
+  - id: final-spec
+    name: "Final Technical Specification"
+    persona: scope-architect
+    task: tasks/05-final-spec.md
+    execution: inline
+    input: output/01-scope-draft.md
+    output: output/05-final-spec.md

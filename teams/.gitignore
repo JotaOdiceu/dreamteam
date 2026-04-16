@@ -1,0 +1,6 @@
+# Ignore all teams by default to keep local work private.
+# The example-team is the only exception: it ships with the repo as a demo.
+*
+!.gitignore
+!example-team
+!example-team/**

@@ -1,0 +1,5 @@
+id,name,title,icon,source,persona_file
+scope-architect,Scope Architect,Technical Scope and Specification Architect,📐,global,personas/scope-architect.persona.md
+backend-engineer,Backend Engineer,Senior Backend Engineer (NestJS),⚙️,global,personas/backend-engineer.persona.md
+frontend-engineer,Frontend Engineer,Senior Frontend Engineer (Next.js),🖥️,global,personas/frontend-engineer.persona.md
+security-engineer,Security Engineer,Application Security Engineer,🔒,global,personas/security-engineer.persona.md
